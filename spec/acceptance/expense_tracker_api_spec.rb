@@ -7,7 +7,6 @@ module ExpenseTracker
     include Rack::Test::Methods
 
     it 'records submitted expenses' do
-      pending 'Need to persist expenses'
 
       coffee = post_expense(
         'payee' => 'Starbucks',
@@ -51,7 +50,7 @@ module ExpenseTracker
 
       expect(parsed).to include('expense_id' => a_kind_of(Integer))
 
-      expense.merge(id: parsed['expense_id'])
+      expense.merge('id' => parsed['expense_id'])
     end
 
   end
