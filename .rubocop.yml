@@ -16,6 +16,11 @@ Layout/SpaceInLambdaLiteral:
 Metrics/MethodLength:
   Max: 15
 
+Metrics/ModuleLength:
+  Max: 100
+  Exclude:
+    - spec/**/*
+
 Metrics/BlockLength:
   Enabled: true
   Exclude:
