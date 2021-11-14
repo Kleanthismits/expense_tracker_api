@@ -5,7 +5,8 @@ module ExpenseTracker
 
   class Ledger
     def record(expense)
-      return error_result('Invalid expense: `payee` is required') unless expense.key?('payee')
+      error = validate_expense(expense)
+      return error unless error.nil?
 
       DB[:expenses].insert(expense)
       id = DB[:expenses].max(:id)
@@ -17,6 +18,11 @@ module ExpenseTracker
     end
 
     private
+
+    def validate_expense(expense)
+      return error_result('Invalid expense: `payee` is required') unless expense.key?('payee')
+      return error_result('`Amount` should be a number') unless expense['amount'].is_a? Numeric
+    end
 
     def error_result(message)
       RecordResult.new(false, nil, message)

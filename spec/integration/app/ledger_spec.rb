@@ -24,8 +24,20 @@ module ExpenseTracker
             date: Date.iso8601('2021-10-20')
           )]
         end
+      end
 
-        it 'rejects the expense as invalid' do
+      context 'with an invalid expense rejects the expense' do
+        it 'if the amount is not a number' do
+          expense['amount'] = 'amount'
+
+          result = ledger.record(expense)
+
+          expect(result).not_to be_success
+          expect(result.expense_id).to eq(nil)
+          expect(result.error_message).to include('`Amount` should be a number')
+        end
+
+        it 'if it does not contain a `payee`' do
           expense.delete('payee')
 
           result = ledger.record(expense)
@@ -35,6 +47,7 @@ module ExpenseTracker
           expect(result.error_message).to include('`payee` is required')
         end
       end
+
     end
 
     describe '#expenses_on' do
