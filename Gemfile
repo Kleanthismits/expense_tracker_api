@@ -12,6 +12,7 @@ gem 'rack-test'
 gem 'sinatra'
 gem 'sequel'
 gem 'sqlite3'
+gem 'ox'
 
 group :development, :test do
   gem 'rubocop', '~> 1.20'
