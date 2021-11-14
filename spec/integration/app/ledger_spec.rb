@@ -47,7 +47,6 @@ module ExpenseTracker
           expect(result.error_message).to include('`payee` is required')
         end
       end
-
     end
 
     describe '#expenses_on' do

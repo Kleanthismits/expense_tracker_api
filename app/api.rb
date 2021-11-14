@@ -20,6 +20,11 @@ module ExpenseTracker
       JSON.generate('error' => result.error_message)
     end
 
+    get '/expenses' do
+      result = ledger.expenses
+      JSON.generate(result)
+    end
+
     get '/expenses/:date' do
       result = ledger.expenses_on(params[:date])
       JSON.generate(result)

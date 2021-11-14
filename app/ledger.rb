@@ -17,6 +17,10 @@ module ExpenseTracker
       DB[:expenses].where(date: date).all
     end
 
+    def expenses
+      DB[:expenses].all
+    end
+
     private
 
     def validate_expense(expense)
